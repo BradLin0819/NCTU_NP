@@ -1,0 +1,7 @@
+*.o
+Parser_test.cpp
+np_simple
+np_single_proc
+np_multi_proc
+parser_test
+.vscode
