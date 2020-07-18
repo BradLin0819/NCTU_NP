@@ -1,24 +1,24 @@
-CXX 	=	g++
-COMMON_OBJS	=	Parser.o	Command.o utils.o
-NP_SIMPLE_OBJS	=	np_simple.o $(COMMON_OBJS)
-NP_SINGLE_OBJS	=	np_single_proc.o $(COMMON_OBJS)
-NP_MULTI_OBJS	=	np_multi_proc.o $(COMMON_OBJS)	semaphore.o
-PARSER_TEST_OBJS	=	Parser_test.o $(COMMON_OBJS)
-all:	np_simple	 np_single_proc	np_multi_proc
+CXX = g++
+COMMON_OBJS	= Parser.o Command.o utils.o
+NP_SIMPLE_OBJS = np_simple.o $(COMMON_OBJS)
+NP_SINGLE_OBJS = np_single_proc.o $(COMMON_OBJS)
+NP_MULTI_OBJS = np_multi_proc.o $(COMMON_OBJS) semaphore.o
+PARSER_TEST_OBJS = Parser_test.o $(COMMON_OBJS)
+all: np_simple np_single_proc np_multi_proc
 
 np_simple: $(NP_SIMPLE_OBJS)	
-	$(CXX)	$(NP_SIMPLE_OBJS)		-o	$@
+	$(CXX)	$(NP_SIMPLE_OBJS) -o $@
 np_simple.o:	np_simple.cpp	Parser.h utils.h
 	$(CXX)	-c	-g -o $@ $<
 np_single_proc: $(NP_SINGLE_OBJS)	
-	$(CXX)	$(NP_SINGLE_OBJS)		-o	$@
+	$(CXX)	$(NP_SINGLE_OBJS) -o $@
 parser_test:	$(PARSER_TEST_OBJS)
-	$(CXX)	$(PARSER_TEST_OBJS)		-o	$@
-np_single_proc.o:	np_single_proc.cpp	Parser.h utils.h
+	$(CXX)	$(PARSER_TEST_OBJS) -o $@
+np_single_proc.o:	np_single_proc.cpp np_single_proc.h Parser.h utils.h
 	$(CXX)	-c	-g -o $@ $<
 np_multi_proc: $(NP_MULTI_OBJS)	
-	$(CXX)	$(NP_MULTI_OBJS)		-o	$@
-np_multi_proc.o:	np_multi_proc.cpp	Parser.h utils.h	semaphore.h
+	$(CXX)	$(NP_MULTI_OBJS) -o $@
+np_multi_proc.o:	np_multi_proc.cpp np_multi_proc.h Parser.h utils.h	semaphore.h
 	$(CXX)	-c	-g -o $@ $<
 Parser_test.o:	Parser_test.cpp	Parser.h utils.h
 	$(CXX)	-c	-g -o $@ $<
